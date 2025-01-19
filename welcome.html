@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Countdown</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function calculateDays() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+            const dob = new Date(urlParams.get('dob'));
+            const today = new Date();
+            let nextBirthday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+
+            if (today > nextBirthday) {
+                nextBirthday.setFullYear(today.getFullYear() + 1);
+            }
+
+            const diffTime = Math.abs(nextBirthday - today);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            document.getElementById('days-count').innerText = `${diffDays} days`;
+            document.getElementById('name-display').innerText = `${name}`;
+        }
+    </script>
+</head>
+<body onload="calculateDays()">
+    <div class="galaxy-background">
+        <div class="countdown-container">
+            <h1> <span id="days-count">//h1>
+            <h2> Days Until Your Birthday, <span id="name-display"></span></h2>
+            
+        </div>
+    </div>
+</body>
+</html>
